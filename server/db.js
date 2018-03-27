@@ -7,10 +7,10 @@ var mysql      = require('mysql');
 // });
 
 var config = {
-  host     : 'qdm204983338.my3w.com',
-  user     : 'qdm204983338',
-  password : 'hs3410040434lgm',
-  database : 'qdm204983338_db'
+  host     : '****',
+  user     : '*****',
+  password : '****',
+  database : '****'
 }
 
 function handleError (err) {
