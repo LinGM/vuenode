@@ -1,0 +1,1 @@
+export const articleId = state=>state.articleId
