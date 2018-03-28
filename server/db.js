@@ -1,38 +1,22 @@
-var mysql      = require('mysql');
-// var connection = mysql.createConnection({
-//   host     : '****',
-//   user     : '****',
-//   password : '****',
-//   database : '****'
-// });
+var mysql = require('mysql');
+var dbconfig = require('./dbconfig')
 
-var config = {
-  host     : '****',
-  user     : '****',
-  password : '****',
-  database : '****'
-}
+var config = dbconfig
+var pool = mysql.createPool(config);
 
-function handleError (err) {
-  if (err) {
-    // 如果是连接断开，自动重新连接
-    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      connect();
-    } else {
-      console.error(err.stack || err);
+var query = function(sql,callback){
+  pool.getConnection(function(err,connection){
+    if(err){
+      callback(err,null);
+    }else{
+      connection.query(sql,function(err,res){
+        //释放连接
+        connection.release();
+        //回调
+        callback(err,res);
+      })
     }
-  }
+  })
 }
-
-// 连接数据库
-function connect () {
-  connection = mysql.createConnection(config);
-  connection.connect(handleError);
-  connection.on('error', handleError);
-}
-
-var connection;
-connect();
-
-module.exports = connection;
+module.exports = query;
 
