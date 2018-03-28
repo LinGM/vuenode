@@ -8,7 +8,7 @@ var mysql      = require('mysql');
 
 var config = {
   host     : '****',
-  user     : '*****',
+  user     : '****',
   password : '****',
   database : '****'
 }

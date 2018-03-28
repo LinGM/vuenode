@@ -13,7 +13,7 @@ router.get('/api/login/getAccount', (req, res) => {
             res.send(result);
         }
     })
-    connection.end();
+    //connection.end();
 });
 
 module.exports = router;
